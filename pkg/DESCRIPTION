@@ -1,0 +1,13 @@
+Package: envvars
+Type: Package
+Title: Manipulation/Propogation of Shell and R level Variables
+Version: 0.0-1
+Date: 2014-09-29
+Author: Jonathan Olmsted
+Maintainer: Jonathan Olmsted <jpolmsted@gmail.com>
+Description: This package provides a mechanism to set and
+             propogate environmental variables to R sessions for
+             seamless execution from a variety of contexts.
+License: GPL (>= 2)
+Suggests:
+        testthat
