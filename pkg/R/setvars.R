@@ -1,5 +1,6 @@
 setvars <- function(.vars = list(),
-                    .mode = "fallback"
+                    .mode = "fallback",
+                    .post = {}
                     ) {
     ## ##########
     ## Check Mode
@@ -57,5 +58,11 @@ setvars <- function(.vars = list(),
         }
     }
 
+    ## ###################
+    ## Post-Process Values
+    ## ###################
+    eval(.post, envir = .GlobalEnv)
+
+    ## Returns
     invisible(NULL)
 }
