@@ -1,6 +1,8 @@
 setvars <- function(.vars = list(),
                     .mode = "fallback",
-                    .post = {}
+                    .post = {},
+                    .numeric = character(),
+                    .integer = character()
                     ) {
     ## ##########
     ## Check Mode
@@ -27,8 +29,6 @@ setvars <- function(.vars = list(),
 
     isEmpty <- nchar(vValues1) == 0
     toSet <- isEmpty | .mode == "override"
-
-    ## print(toSet)
 
     ## #################
     ## Process Variables
@@ -62,6 +62,27 @@ setvars <- function(.vars = list(),
     ## Post-Process Values
     ## ###################
     eval(.post, envir = .GlobalEnv)
+
+    ## ################
+    ## Integer Coercion
+    ## ################
+
+    ## ########
+    ## Coercion
+    ## ########
+    types <- c("numeric", "integer")
+    for (atype in types) {
+        for (c in get(paste(".", atype, sep = ""))) {
+            assign(x = c,
+                   value = (get(paste("as.", atype, sep = "")))(get(c)),
+                   envir = .GlobalEnv
+                   )
+        }
+    }
+
+
+
+
 
     ## Returns
     invisible(NULL)
